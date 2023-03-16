@@ -1,0 +1,35 @@
+{% extends 'function/base.html' %}
+
+{% block content %}
+
+<!-- {% if context %}
+        <h1>present key: {{context}}</h1>
+    {% endif %} -->
+<center class="config-Table">
+    <h1 class="navbar-brand">Config board</h1>
+    <form class="form-inline" method="POST" action="{% url 'function:config' %}">
+        {% csrf_token %}
+
+        <div class="input-form">
+            <label for="source">Tên nguồn: </label>
+            <select value="source" id="source">
+                <option value="misp">MISP</option>
+                <option value="zoneh">Zone-h</option>
+            </select>
+        </div>
+        <div class="input-form">
+            <label for="filter">Filter: </label>
+            <input id="filter" class="form-control mr-sm-2" type="input" placeholder="Nhập filter (.gov, .gov.vn, ...)"
+                aria-label="Search" name="config">
+        </div>
+        <div class="input-form">
+            <label for="time">Thời gian: </label>
+            <input id="time" class="form-control mr-sm-2" type="input" placeholder="Thoi gian (milliseconds)"
+                aria-label="Search" name="config">
+        </div>
+        <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="input2">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="input3"> -->
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">config</button>
+    </form>
+</center>
+{% endblock content %}
