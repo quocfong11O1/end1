@@ -13,6 +13,10 @@ import re
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
+options = webdriver.ChromeOptions()
+options.add_experimental_option('excludeSwitches', ['enable-logging'])
+browser = webdriver.Chrome(options=options)
+
 
 # Create your views here.
 mydb = mysql.connector.connect(
@@ -78,9 +82,42 @@ class JobScheduler:
 
 
 JobScheduler.add_job('http://www.zone-h.org/rss/specialdefacements', interval=default)
+
+def archive():
+    browser.get("http://www.zone-h.org/archive?hz=1")
+
+    for i in range(2, 27):
+        a = '#ldeface > tbody > tr:nth-child(' + str(i) +') > td:nth-child(8)'
+        test = browser.find_element(By.CSS_SELECTOR, a)
+        string = test.text
+        string_after = string.split("/")
+        link1= string_after[0]
+        link_final = re.findall(".com$", link1)
+        if link_final:
+            print(link1)
+    browser.close()
+
+scheduler.add_job(archive, 'interval', seconds=30)
+
+
 scheduler.start()
 
+def config(request):
+    global default
+    config = default
 
+    if request.method == "POST":
+        config = request.POST["config"]
+        default = int(config)
+        test = int(config)
+        timesql = "UPDATE `setting` SET time=" + str(config) + " WHERE name='admin';"
+        cursor.execute(timesql)
+        JobScheduler.remove_job('http://www.zone-h.org/rss/specialdefacements')
+        JobScheduler.add_job('http://www.zone-h.org/rss/specialdefacements', test)
+
+
+    mydb.commit()
+    return render(request, 'function/config.html',{'context': default})
 
 
 def feed_view(request):
@@ -114,46 +151,3 @@ def list(request):
     result = cursor.fetchall()
     mydb.commit()
     return render(request, 'function/list.html',{'result': result})
-
-def config(request):
-    global default
-    config = default
-
-    if request.method == "POST":
-        config = request.POST["config"]
-        default = int(config)
-        test = int(config)
-        timesql = "UPDATE `setting` SET time=" + str(config) + " WHERE name='admin';"
-        cursor.execute(timesql)
-        JobScheduler.remove_job('http://www.zone-h.org/rss/specialdefacements')
-        JobScheduler.add_job('http://www.zone-h.org/rss/specialdefacements', test)
-
-
-    mydb.commit()
-    return render(request, 'function/config.html',{'context': default})
-
-
-
-
-"""===================================================================="""
-options = webdriver.ChromeOptions()
-options.add_experimental_option('excludeSwitches', ['enable-logging'])
-browser = webdriver.Chrome(options=options)
-
-def archive():
-    browser.get("http://www.zone-h.org/archive?hz=1")
-
-    for i in range(2, 27):
-        a = '#ldeface > tbody > tr:nth-child(' + str(i) +') > td:nth-child(8)'
-        test = browser.find_element(By.CSS_SELECTOR, a)
-        string = test.text
-        string_after = string.split("/")
-        link1= string_after[0]
-        link_final = re.findall(".com$", link1)
-        if link_final:
-            print(link1)
-    browser.close()
-
-
-
-scheduler.add_job(archive, 'interval', seconds=30)
