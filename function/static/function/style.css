@@ -4,9 +4,21 @@
     box-sizing: border-box;
 } */
 
-body {display: grid;
+body {
+    display: grid;
     grid-auto-columns: 1fr 4fr;
-    place-items: center;}
+    place-items: center;
+}
+
+.table>tbody>tr>td {
+    word-wrap: break-word;
+}
+
+:root {
+    --sidebar_width: 260px;
+}
+
+
 
 /* NAVBAR */
 
