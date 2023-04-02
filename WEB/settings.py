@@ -41,8 +41,17 @@ INSTALLED_APPS = [
     'core',
     'function',
     'account',
+    'tailwind',
+    'theme',
+    'django_browser_reload',
 
 ]
+
+TAILWIND_APP_NAME = 'theme'
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+NPM_BIN_PATH = "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm.cmd"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -52,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = 'WEB.urls'
@@ -83,7 +93,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'nckh',
         'USER':'root',
-        'PASSWORD':'root',
+        'PASSWORD':'phongquoc',
         'HOST':'127.0.0.1',
         'PORT':'3306'
     }

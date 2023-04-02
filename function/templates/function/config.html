@@ -5,31 +5,39 @@
 <!-- {% if context %}
         <h1>present key: {{context}}</h1>
     {% endif %} -->
-<center class="config-Table">
-    <h1 class="navbar-brand">Config board</h1>
-    <form class="form-inline" method="POST" action="{% url 'function:config' %}">
-        {% csrf_token %}
+<main class="config_table">
+    <h1>CONFIG BOARD</h1>
+    <form class="form__input">
+        <section class="input__form firstName__input">
+            <label for="firstName">First Name: </label>
+            <input type="text" placeholder="First Name" id="firstName" autocomplete="off">
+        </section>
 
-        <div class="input-form">
-            <label for="source">Tên nguồn: </label>
-            <select value="source" id="source">
+        <section class="input__form lastName__input">
+            <label for="lastName">Last Name: </label>
+            <input type="text" placeholder="Last Name" id="lastName" autocomplete="off">
+        </section>
+
+        <section class="input__form email__input">
+            <label for="email">Email: </label>
+            <input type="email" placeholder="Email" id="email" autocomplete="off">
+        </section>
+        <section class="input__form phone__input">
+            <label for="phone">Phone number: </label>
+            <input type="phone" placeholder="Phone number" id="phone" autocomplete="off">
+        </section>
+        <section class="input__form email__input idNumber__input">
+            <label for="idNumber">ID Number: </label>
+            <input type="number" placeholder="Id Number" id="idNumber" autocomplete="off">
+        </section>
+        <section class="input__form email__input source__input">
+            <label>Source: </label>
+            <select>
                 <option value="misp">MISP</option>
-                <option value="zoneh">Zone-h</option>
+                <option value="zoneh">ZoneH</option>
             </select>
-        </div>
-        <div class="input-form">
-            <label for="filter">Filter: </label>
-            <input id="filter" class="form-control mr-sm-2" type="input" placeholder="Nhập filter (.gov, .gov.vn, ...)"
-                aria-label="Search" name="config">
-        </div>
-        <div class="input-form">
-            <label for="time">Thời gian: </label>
-            <input id="time" class="form-control mr-sm-2" type="input" placeholder="Thoi gian (milliseconds)"
-                aria-label="Search" name="config">
-        </div>
-        <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="input2">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="input3"> -->
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">config</button>
+        </section>
+        <button class="form__button" type="submit">Config</button>
     </form>
-</center>
+</main>
 {% endblock content %}

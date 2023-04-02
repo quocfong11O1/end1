@@ -560,6 +560,7 @@
         height: 640px;
         overflow: hidden;
     }
+
     .parallax .parallax-image img {
         height: 100%;
         width: auto;
@@ -623,10 +624,12 @@
 }
 
 @media (max-width: 768px) {
+
     .btn,
     .btn-morphing {
         margin-bottom: 10px;
     }
+
     .parallax .motto {
         top: 170px;
         margin-top: 0;
@@ -825,4 +828,11 @@
 
 .documentation .dropdown .dropdown-menu.show {
     transform: translate3d(0, 39px, 0) !important;
+}
+
+
+/* custome */
+.layout {
+    width: 80%;
+    height: 100vh !important;
 }

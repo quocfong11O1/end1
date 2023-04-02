@@ -22,7 +22,7 @@ browser = webdriver.Chrome(options=options)
 mydb = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="root",
+        password="phongquoc",
         database="nckh"
     )
 cursor = mydb.cursor()
